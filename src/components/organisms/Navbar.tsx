@@ -1,20 +1,38 @@
-import type { NextPage } from "next";
-const Navbar: NextPage = () => {
+import Link from 'next/link'
+
+const navItems = [
+  { href: '#about', label: 'About me' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#certifications', label: 'Certifications' },
+  { href: '#skills', label: 'Skills & Tools' },
+  { href: '#contact', label: 'Contact' },
+]
+
+export default function Navbar() {
   return (
-    <div className="w-full h-[9.375rem] relative border-whitesmoke-200 border-solid border-b-[1px] box-border overflow-hidden text-left text-[3rem] text-whitesmoke-100 font-playfair-display">
-      <div className="absolute top-[2.688rem] left-[calc(50%_-_840px)] w-[105rem] overflow-hidden flex items-center gap-[15.5rem]">
-        <b className="relative [text-shadow:0px_0px_10px_rgba(255,_255,_255,_0.25)]">
-          Esaú Aguilar
-        </b>
-        <div className="w-[66.438rem] flex items-center justify-between gap-[1.25rem] text-[2rem] font-lato">
-          <div className="relative tracking-num-0_05">About me</div>
-          <div className="relative tracking-num-0_05">Projects</div>
-          <div className="relative tracking-num-0_05">Certifications</div>
-          <div className="relative tracking-num-0_05">{`Skills & Tools`}</div>
-          <div className="relative tracking-num-0_05">Contact</div>
-        </div>
+    <header className="sticky top-0 z-30 border-b border-[rgba(245,245,245,0.11)] bg-[rgba(18,18,18,0.94)] backdrop-blur-xl">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-9">
+        <nav className="flex min-h-[108px] flex-col gap-5 px-4 py-6 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-12">
+          <Link
+            href="/"
+            className="font-title text-[clamp(1.55rem,1.9vw,2rem)] font-semibold leading-none tracking-[-0.03em]"
+          >
+            Esaú Aguilar
+          </Link>
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[1rem] text-[color:var(--foreground)] sm:gap-x-10 sm:text-[1.04rem]">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="font-body text-[0.98rem] font-light tracking-[0.01em] transition-opacity duration-200 hover:opacity-70 sm:text-[1.08rem]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
       </div>
-    </div>
-  );
-};
-export { Navbar };
+    </header>
+  )
+}
