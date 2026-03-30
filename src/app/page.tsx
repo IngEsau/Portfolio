@@ -1,14 +1,20 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Download } from 'lucide-react'
+import { SiAffinitydesigner } from 'react-icons/si'
+import {
+  TbBrandAdobeIllustrator,
+  TbBrandAdobeXd,
+  TbBrandFigma,
+  TbBrandGithubCopilot,
+  TbBrandOpenai,
+  TbBrandVscode,
+} from 'react-icons/tb'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 import Footer from '@/components/organisms/Footer'
 import Navbar from '@/components/organisms/Navbar'
-
-const stats = [
-  { value: '+15', label: 'UI projects', accent: false },
-  { value: '+2k', label: 'Users impacted', accent: true },
-  { value: '+6', label: 'Design tools', accent: false },
-]
 
 const socialLinks = [
   { href: '#', label: 'Instagram', iconPath: '/social/Instagram.svg' },
@@ -16,45 +22,26 @@ const socialLinks = [
   { href: '#', label: 'GitHub', iconPath: '/social/GitHub.svg' },
 ]
 
-const placeholderSections = [
-  {
-    id: 'projects',
-    eyebrow: 'Projects',
-    title: 'Space ready for your case studies',
-    copy:
-      'This section already has the visual language applied so you can continue matching the Figma without redefining colors or typography.',
-  },
-  {
-    id: 'certifications',
-    eyebrow: 'Certifications',
-    title: 'A clean section for achievements and credentials',
-    copy:
-      'Use this block for certificates, courses, and credibility elements. The anchor is already connected from the navigation.',
-  },
-  {
-    id: 'skills',
-    eyebrow: 'Skills & Tools',
-    title: 'Prepared for tools, workflows, and design systems',
-    copy:
-      'The card system and text hierarchy are already in place. You can swap this content with logos, tags, or grouped capabilities.',
-  },
-  {
-    id: 'contact',
-    eyebrow: 'Contact',
-    title: 'Reserve this section for your final CTA',
-    copy:
-      'When you pass the final copy and assets, this can become the closing block with contact links, form, or downloadable CV.',
-  },
-]
+const toolIconMap = {
+  illustrator: TbBrandAdobeIllustrator,
+  figma: TbBrandFigma,
+  affinity: SiAffinitydesigner,
+  xd: TbBrandAdobeXd,
+  vscode: TbBrandVscode,
+  copilot: TbBrandGithubCopilot,
+  openai: TbBrandOpenai,
+}
 
 export default function Home() {
+  const { dictionary } = useLanguage()
+
   return (
     <div className="site-shell">
-      <section className="hero-band">
-        <Navbar />
+      <Navbar />
 
+      <section className="hero-band">
         <main className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-9">
-          <section className="section-divider hero-stage overflow-hidden px-4 sm:px-10 lg:px-12">
+          <section className="hero-stage overflow-hidden px-4 sm:px-10 lg:px-12">
             <Image
               src="/patterns/pattern1.svg"
               alt=""
@@ -65,20 +52,22 @@ export default function Home() {
               priority
             />
 
-            <div className="hero-content mx-auto max-w-[1248px] text-center">              
+            <div className="hero-content mx-auto max-w-[1248px] text-center">
               <div className="mx-auto mt-24 max-w-[1248px]">
                 <h1 className="hero-quote hidden md:block text-[38px] lg:text-[44px] xl:text-[48px]">
-                  <span className="block">&quot;Design is not just what it looks like and</span>
-                  <span className="block">feels like. Design is how it works.&quot;</span>
+                  {dictionary.hero.quoteLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
                 </h1>
 
                 <h1 className="hero-quote md:hidden text-[30px] leading-[1.08]">
-                  &quot;Design is not just what it looks like and feels like.
-                  Design is how it works.&quot;
+                  {dictionary.hero.quoteMobile}
                 </h1>
               </div>
 
-              <p className="hero-author mt-14 text-[18px]">- Steve Jobs</p>
+              <p className="hero-author mt-14 text-[18px]">{dictionary.hero.author}</p>
             </div>
           </section>
         </main>
@@ -88,18 +77,15 @@ export default function Home() {
         <main className="relative z-10 mx-auto max-w-[1440px] px-4 pb-10 sm:px-6 lg:px-9">
           <section className="cards-stage px-4 sm:px-10 lg:px-12">
             <div className="grid gap-5 lg:grid-cols-3 lg:gap-6">
-              {stats.map((stat) => (
+              {dictionary.stats.map((stat) => (
                 <article
                   key={stat.label}
                   className={`stats-card ${stat.accent ? 'stats-card-accent' : 'stats-card-default'}`}
                 >
                   <p className="stats-value">{stat.value}</p>
                   <h2 className="stats-label">{stat.label}</h2>
-                  <Link
-                    href={stat.label === 'UI projects' ? '#projects' : '#contact'}
-                    className="stats-link"
-                  >
-                    View more
+                  <Link href={stat.href} className="stats-link inline-cta">
+                    {stat.cta}
                     <ArrowRight size={16} />
                   </Link>
                 </article>
@@ -109,7 +95,7 @@ export default function Home() {
 
           <section
             id="about"
-            className="about-stage relative overflow-hidden px-4 pb-8 pt-16 sm:px-10 lg:px-12 lg:pb-12 lg:pt-20"
+            className="anchor-section about-stage relative overflow-hidden px-4 pb-8 pt-16 sm:px-10 lg:px-12 lg:pb-12 lg:pt-20"
           >
             <Image
               src="/patterns/pattern1.svg"
@@ -119,33 +105,14 @@ export default function Home() {
               height={1211}
               className="about-pattern about-pattern-left"
             />
-            <Image
-              src="/patterns/pattern2.svg"
-              alt=""
-              aria-hidden="true"
-              width={481}
-              height={713}
-              className="about-pattern about-pattern-right"
-            />
 
             <div className="relative z-10 max-w-[760px]">
-              <h2 className="about-title">Hi! I&apos;m Esaú</h2>
+              <h2 className="about-title">{dictionary.about.title}</h2>
 
               <div className="body-copy mt-10 space-y-5 text-[1rem] sm:text-[1.08rem]">
-                <p>
-                  UX/UI Designer passionate about creating intuitive and
-                  human-centered digital experiences.
-                </p>
-                <p>
-                  I specialize in turning complex problems into simple, elegant
-                  solutions, blending user research, strategy, and visual design
-                  to craft products that truly work.
-                </p>
-                <p>
-                  From wireframes to polished interfaces, I believe design is not
-                  just how things look, but how they feel and function.
-                </p>
-                <p>Let&apos;s build experiences that users love.</p>
+                {dictionary.about.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-12 flex flex-wrap gap-4">
@@ -170,34 +137,284 @@ export default function Home() {
 
               <div className="mt-12 flex flex-wrap gap-4">
                 <Link href="#about" className="button-primary">
-                  About me
+                  {dictionary.about.primaryCta}
                 </Link>
-                <Link href="#" className="button-secondary">
-                  Download my CV
+                <Link href="#contact" className="button-secondary">
+                  {dictionary.about.secondaryCta}
                   <Download size={18} />
                 </Link>
               </div>
             </div>
           </section>
-
-          <section className="space-y-6 px-4 pt-10 sm:px-10 lg:px-12">
-            {placeholderSections.map((section) => (
-              <article
-                key={section.id}
-                id={section.id}
-                className="brand-card rounded-[1.75rem] px-6 py-8 sm:px-8 sm:py-10"
-              >
-                <p className="eyebrow text-xs">{section.eyebrow}</p>
-                <h3 className="font-title mt-4 text-[clamp(1.7rem,2.6vw,3rem)] leading-tight tracking-[-0.03em]">
-                  {section.title}
-                </h3>
-                <p className="body-copy mt-4 max-w-[780px] text-[0.98rem] sm:text-[1.04rem]">
-                  {section.copy}
-                </p>
-              </article>
-            ))}
-          </section>
         </main>
+
+        <section id="projects" className="anchor-section projects-band">
+          <div className="projects-band-shell">
+            <div className="section-header project-band-header">
+              <p className="eyebrow text-xs">{dictionary.projects.eyebrow}</p>
+              <div className="section-heading-copy project-band-copy">
+                <h3 className="section-title">{dictionary.projects.title}</h3>
+                <p className="section-copy">{dictionary.projects.copy}</p>
+              </div>
+            </div>
+
+            <div className="project-gallery project-gallery-fullbleed">
+              <article className="project-showcase project-showcase-featured project-showcase-accent">
+                <div className="project-card-shell">
+                  <div className="project-card-topline">
+                    <p className="project-category">{dictionary.projects.featured.category}</p>
+                    <span className="project-metric">{dictionary.projects.featured.metric}</span>
+                  </div>
+
+                  <div className="project-preview project-preview-featured">
+                    <div className="preview-window">
+                      <div className="preview-window-bar">
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+                      <div className="preview-window-grid">
+                        <div className="preview-panel preview-panel-main" />
+                        <div className="preview-panel preview-panel-side">
+                          <span />
+                          <span />
+                          <span />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="project-copy-block">
+                    <h4 className="project-title">{dictionary.projects.featured.title}</h4>
+                    <p className="body-copy project-copy">{dictionary.projects.featured.copy}</p>
+
+                    <div className="pill-row">
+                      {dictionary.projects.featured.tags.map((item) => (
+                        <span key={item} className="pill pill-accent">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link href="#contact" className="inline-cta project-cta">
+                      {dictionary.projects.featured.cta}
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+
+              <div className="project-side-stack">
+                {dictionary.projects.side.map((project) => (
+                  <article key={project.title} className="project-showcase project-showcase-compact">
+                    <div className="project-card-shell">
+                      <div className="project-card-topline">
+                        <p className="project-category">{project.category}</p>
+                        <span className="project-metric">{project.metric}</span>
+                      </div>
+
+                      <div className="project-preview project-preview-compact">
+                        <div className="preview-mini-grid">
+                          <div className="preview-chip" />
+                          <div className="preview-chip" />
+                          <div className="preview-chip wide" />
+                        </div>
+                      </div>
+
+                      <div className="project-copy-block">
+                        <h4 className="project-title">{project.title}</h4>
+                        <p className="body-copy project-copy">{project.copy}</p>
+
+                        <div className="pill-row">
+                          {project.tags.map((item) => (
+                            <span key={item} className="pill">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+
+                        <Link href="#contact" className="inline-cta project-cta">
+                          {project.cta}
+                          <ArrowRight size={16} />
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <article className="project-showcase project-showcase-wide">
+                <div className="project-card-shell project-card-shell-wide">
+                  <div className="project-copy-block">
+                    <p className="project-category">{dictionary.projects.wide.category}</p>
+                    <h4 className="project-title">{dictionary.projects.wide.title}</h4>
+                    <p className="body-copy project-copy">{dictionary.projects.wide.copy}</p>
+
+                    <div className="pill-row">
+                      {dictionary.projects.wide.tags.map((item) => (
+                        <span key={item} className="pill pill-accent-soft">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="wide-stats-grid">
+                    {dictionary.projects.wide.stats.map((stat) => (
+                      <div key={stat.label} className="wide-stat-card">
+                        <span className="wide-stat-value">{stat.value}</span>
+                        <span className="wide-stat-label">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-break section-break-deep">
+          <main className="relative z-10 mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-9">
+            <section
+              id="certifications"
+              className="anchor-section section-shell px-4 pt-4 sm:px-10 lg:px-12"
+            >
+              <div className="section-header">
+                <p className="eyebrow text-xs">{dictionary.certifications.eyebrow}</p>
+                <div className="section-heading-copy">
+                  <h3 className="section-title">{dictionary.certifications.title}</h3>
+                  <p className="section-copy">{dictionary.certifications.copy}</p>
+                </div>
+              </div>
+
+              <div className="certification-layout">
+                <article className="certificate-hero-card certificate-hero-card-wide">
+                  <div className="certificate-hero-copy">
+                    <p className="learning-subtitle">{dictionary.certifications.hero.subtitle}</p>
+                    <h4 className="certificate-hero-title">
+                      {dictionary.certifications.hero.title}
+                    </h4>
+                    <p className="body-copy learning-copy">
+                      {dictionary.certifications.hero.copy}
+                    </p>
+                  </div>
+
+                  <div className="certificate-hero-meta">
+                    {dictionary.certifications.hero.meta.map((item) => (
+                      <div key={item.label} className="certificate-meta-card">
+                        <span className="certificate-meta-label">{item.label}</span>
+                        <strong>{item.value}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <div className="certificate-grid certificate-grid-shelf">
+                  {dictionary.certifications.cards.map((item) => (
+                    <article key={item.title} className="certificate-card">
+                      <div className="certificate-card-topline">
+                        <span className="certificate-badge">{item.provider}</span>
+                        <span className="certificate-year">{item.year}</span>
+                      </div>
+                      <h4 className="learning-title">{item.title}</h4>
+                      <p className="body-copy learning-copy">{item.copy}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <div className="section-dark-divider" aria-hidden="true" />
+
+            <section
+              id="skills"
+              className="anchor-section section-shell px-4 pt-12 sm:px-10 lg:px-12"
+            >
+              <div className="section-header">
+                <p className="eyebrow text-xs">{dictionary.skills.eyebrow}</p>
+                <div className="section-heading-copy">
+                  <h3 className="section-title">{dictionary.skills.title}</h3>
+                  <p className="section-copy">{dictionary.skills.copy}</p>
+                </div>
+              </div>
+
+              <div className="skills-layout">
+                <article className="skills-summary-card">
+                  <p className="learning-subtitle">{dictionary.skills.strengthsSubtitle}</p>
+                  <h4 className="certificate-hero-title">{dictionary.skills.strengthsTitle}</h4>
+                  <div className="capability-list">
+                    {dictionary.skills.capabilities.map((item) => (
+                      <div key={item.title} className="capability-item">
+                        <h5 className="capability-title">{item.title}</h5>
+                        <p className="body-copy capability-copy">{item.copy}</p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <div className="skills-inline-stage">
+                  <div className="skills-inline-copy">
+                    <p className="learning-subtitle">{dictionary.skills.toolsSubtitle}</p>
+                    <p className="section-copy skills-tools-copy">
+                      {dictionary.skills.toolsCopy}
+                    </p>
+                  </div>
+
+                  <div className="tool-logo-row">
+                    {dictionary.skills.tools.map((tool) => {
+                      const Icon = toolIconMap[tool.icon]
+
+                      return (
+                        <div key={tool.name} className="tool-logo-item">
+                          <Icon className="tool-logo-icon" aria-hidden="true" />
+                          <div className="tool-logo-copy">
+                            <span className="tool-logo-name">{tool.name}</span>
+                            <span className="tool-logo-caption">{tool.group}</span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+        </section>
+
+        <section className="section-break section-break-black">
+          <main className="relative z-10 mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-9">
+            <section
+              id="contact"
+              className="anchor-section section-shell px-4 pb-6 pt-4 sm:px-10 lg:px-12"
+            >
+              <article className="contact-panel contact-panel-accent">
+                <div className="contact-copy-block">
+                  <p className="eyebrow text-xs">{dictionary.contact.eyebrow}</p>
+                  <h3 className="section-title max-w-[12ch]">{dictionary.contact.title}</h3>
+                  <p className="section-copy contact-copy">{dictionary.contact.copy}</p>
+
+                  <div className="mt-10 flex flex-wrap gap-4">
+                    <Link href="mailto:hello@portfolio.dev" className="button-primary">
+                      {dictionary.contact.primaryCta}
+                    </Link>
+                    <Link href="#projects" className="button-secondary">
+                      {dictionary.contact.secondaryCta}
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="contact-points">
+                  {dictionary.contact.details.map((point) => (
+                    <article key={point.label} className="contact-point">
+                      <p className="contact-point-label">{point.label}</p>
+                      <p className="contact-point-value">{point.value}</p>
+                    </article>
+                  ))}
+                </div>
+              </article>
+            </section>
+          </main>
+        </section>
       </section>
 
       <Footer />
