@@ -5,6 +5,7 @@ import {
   Lato,
   Playfair_Display,
 } from 'next/font/google'
+import { LanguageProvider } from '@/components/providers/LanguageProvider'
 import './globals.css'
 
 const lato = Lato({
@@ -46,11 +47,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${lato.variable} ${playfair.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   )
