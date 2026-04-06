@@ -34,7 +34,7 @@ npm run dev
 The app will be available at:
 
 ```bash
-http://localhost:3000
+https://portfolio-ingesaus-projects.vercel.app/
 ```
 
 Useful scripts:
@@ -86,7 +86,6 @@ public/
 
 - Social icons and decorative pattern assets live in `public/`.
 - The CV is served from `public/documents/`.
-- Local editor config under `.vscode/` is intentionally ignored and not part of the repository.
 
 ## Validation
 
