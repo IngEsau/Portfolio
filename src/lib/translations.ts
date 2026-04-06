@@ -1,11 +1,12 @@
 export type ToolIconKey =
-  | 'illustrator'
   | 'figma'
-  | 'affinity'
-  | 'xd'
+  | 'nextjs'
+  | 'react'
+  | 'typescript'
+  | 'tailwind'
   | 'vscode'
-  | 'copilot'
-  | 'openai'
+  | 'framer'
+  | 'github'
 
 type Translation = {
   nav: {
@@ -45,6 +46,8 @@ type Translation = {
       copy: string
       tags: string[]
       cta: string
+      href: string
+      external?: boolean
     }
     side: Array<{
       title: string
@@ -53,12 +56,17 @@ type Translation = {
       copy: string
       tags: string[]
       cta: string
+      href: string
+      external?: boolean
     }>
     wide: {
       title: string
       category: string
       copy: string
       tags: string[]
+      cta: string
+      href: string
+      external?: boolean
       stats: Array<{
         label: string
         value: string
@@ -69,6 +77,9 @@ type Translation = {
     eyebrow: string
     title: string
     copy: string
+    issuedLabel: string
+    credentialIdLabel: string
+    ctaLabel: string
     hero: {
       subtitle: string
       title: string
@@ -81,8 +92,9 @@ type Translation = {
     cards: Array<{
       title: string
       provider: string
-      year: string
-      copy: string
+      issuedAt: string
+      credentialId: string
+      href?: string
     }>
   }
   skills: {
@@ -90,13 +102,10 @@ type Translation = {
     title: string
     copy: string
     strengthsSubtitle: string
-    strengthsTitle: string
     capabilities: Array<{
       title: string
       copy: string
     }>
-    toolsSubtitle: string
-    toolsCopy: string
     tools: Array<{
       name: string
       group: string
@@ -115,8 +124,7 @@ type Translation = {
     }>
   }
   footer: {
-    line1: string
-    line2: string
+    line1: string    
   }
 }
 
@@ -140,24 +148,24 @@ const en: Translation = {
   },
   stats: [
     {
-      value: '+15',
-      label: 'UI projects',
+      value: '03',
+      label: 'Selected projects',
       href: '#projects',
-      cta: 'View more',
+      cta: 'View projects',
       accent: false,
     },
     {
-      value: '+2k',
-      label: 'Users impacted',
-      href: '#contact',
-      cta: 'View more',
+      value: 'UX/UI',
+      label: 'Optimized product flows',
+      href: '#projects',
+      cta: 'See work',
       accent: true,
     },
     {
-      value: '+6',
-      label: 'Design tools',
-      href: '#skills',
-      cta: 'View more',
+      value: '04',
+      label: 'Verified credentials',
+      href: '#certifications',
+      cta: 'View credentials',
       accent: false,
     },
   ],
@@ -165,108 +173,130 @@ const en: Translation = {
     title: "Hi! I'm Esaú",
     paragraphs: [
       'UX/UI Designer passionate about creating intuitive and human-centered digital experiences.',
-      'I specialize in turning complex problems into simple, elegant solutions, blending user research, strategy, and visual design to craft products that truly work.',
-      'From wireframes to polished interfaces, I believe design is not just how things look, but how they feel and function.',
-      "Let's build experiences that users love.",
+      'I work across research, interface design, prototyping, and frontend implementation to turn complex needs into clear user flows and well-structured products.',
+      'My approach combines visual polish with measurable business impact, from improving conversions and productivity to making digital systems easier to understand and use.',
+      'From wireframes to polished interfaces, I focus on products that not only look good, but also feel coherent, useful, and efficient.',
+      "I'm especially interested in projects where UX, UI, and product strategy need to work together to move real results.",
     ],
-    primaryCta: 'About me',
+    primaryCta: 'View projects',
     secondaryCta: 'Download my CV',
   },
   projects: {
     eyebrow: 'Projects',
-    title: 'A full-width gallery built to let your strongest UX/UI work take over the screen.',
+    title:
+      'Selected UX/UI work focused on clarity, systems, and interfaces that feel intentional from the first screen.',
     copy:
-      'The project area should feel like the visual centerpiece of the SPA: broader, brighter, and more editorial so the work reads like a premium gallery instead of a stack of generic cards.',
+      'These projects reflect the way I solve problems through UX/UI: improving clarity, supporting real workflows, and turning digital products into more effective experiences for businesses and users.',
     featured: {
-      title: 'Mercury Wallet redesign',
-      category: 'Product redesign',
-      metric: '-38% onboarding friction',
+      title: 'Bandas Asesoría y Montaje S.A. de C.V.',
+      category: 'Website redesign + SEO + e-commerce',
+      metric: 'More sales and qualified leads',
       copy:
-        'A fintech onboarding experience rebuilt to feel trustworthy, clear, and operationally efficient across identity steps and product entry points.',
-      tags: ['Research synthesis', 'Flow redesign', 'Interface system'],
-      cta: 'Open case study',
+        'A complete website redesign in WordPress focused on improving structure, search visibility, and the shopping experience. The result was a stronger digital presence with better SEO, more clients, and higher sales through the integrated e-commerce flow.',
+      tags: ['WordPress', 'SEO improvement', 'E-commerce UX'],
+      cta: 'Visit website',
+      href: 'https://bandasyasesoria.com.mx/',
+      external: true,
     },
     side: [
       {
-        title: 'Analytics command center',
-        category: 'Dashboard UI',
-        metric: '+27% task clarity',
+        title: 'Montblan mobile system',
+        category: 'Mobile + web workflow optimization',
+        metric: '+80% productivity in order capture',
         copy:
-          'Dense data reframed into a cleaner decision layer for internal operations and product teams.',
-        tags: ['Hierarchy', 'Scannability', 'Responsive states'],
-        cta: 'View project',
+          'I improved the overall UX/UI to make core business flows more efficient and easier to navigate. The redesign helped the team capture orders faster and move through operational tasks with better continuity across web and mobile contexts.',
+        tags: ['Flow efficiency', 'UX/UI redesign', 'Operational productivity'],
+        cta: 'View live system',
+        href: 'https://montblan.lerco.agency/',
+        external: true,
       },
       {
-        title: 'Boutique commerce landing',
-        category: 'Marketing experience',
-        metric: '+19% click depth',
+        title: 'Sociograma UTP',
+        category: 'Educational system + social analysis',
+        metric: 'Faster group insight detection',
         copy:
-          'Editorial visuals and conversion blocks aligned into a premium, high-trust landing experience.',
-        tags: ['Visual direction', 'Storytelling', 'CTA flow'],
-        cta: 'View project',
+          'A system developed for the Universidad Tecnológica de Puebla to identify isolated people in groups more quickly. I contributed mainly to the Figma design and part of the implementation so the interface could support faster interpretation and clearer decision-making.',
+        tags: ['Figma UI', 'System design', 'Educational product'],
+        cta: 'Open live project',
+        href: 'https://sociograma-utp.pages.dev/login',
+        external: true,
       },
     ],
     wide: {
-      title: 'Portfolio system and design direction',
-      category: 'Brand + frontend execution',
+      title: 'Backstabber',
+      category: 'Desktop interface for security tooling',
       copy:
-        'A modular portfolio language that connects typography, storytelling, and frontend implementation so the visual experience feels intentional from top to bottom.',
-      tags: ['Design systems', 'Frontend implementation', 'Content architecture'],
+        'A modular penetration testing toolkit written in Python with a PyQt5 interface. What makes this project stand out in my portfolio is the interface work: the structure, visual hierarchy, and control patterns were designed to keep a technically dense tool understandable and usable through UX principles and Nielsen heuristics.',
+      tags: ['PyQt5 UI', 'Nielsen heuristics', 'Information hierarchy'],
+      cta: 'View repository',
+      href: 'https://github.com/IngEsau/Backstabber',
+      external: true,
       stats: [
-        { label: 'Case studies', value: '03' },
-        { label: 'Systems built', value: '06' },
-        { label: 'Design stages', value: 'End to end' },
+        { label: 'Platform', value: 'Desktop' },
+        { label: 'Stack', value: 'Python + PyQt5' },
+        { label: 'Focus', value: 'Usable technical UI' },
       ],
     },
   },
   certifications: {
     eyebrow: 'Certifications',
-    title: 'A cleaner certification shelf focused on Platzi, credibility, and visible professional growth.',
+    title:
+      'Verified learning focused on frontend foundations, mobile-first thinking, and interface design execution.',
     copy:
-      'This section now behaves like a premium credential area. It gives context to your learning path first, then presents each certificate with enough hierarchy to feel intentional instead of improvised.',
+      'These credentials support the way I work: with attention to usability, responsiveness, and the details that make digital products easier to understand and use.',
+    issuedLabel: 'Issued',
+    credentialIdLabel: 'Credential ID',
+    ctaLabel: 'View credential',
     hero: {
       subtitle: 'Platzi learning path',
-      title: 'Continuous learning in research, product systems, and interface craft.',
+      title:
+        'A learning path built around frontend, mobile-first design, and cleaner interface decisions.',
       copy:
-        'Use this opening panel to frame your certifications as part of an evolving UX/UI practice, not as disconnected badges.',
+        'Each course reinforces practical areas of my process: how interfaces are structured, how they behave on smaller screens, and how design decisions translate into production-ready experiences.',
       meta: [
         { label: 'Provider', value: 'Platzi' },
-        { label: 'Focus', value: 'UX/UI + Product' },
-        { label: 'Format', value: 'Continuous learning' },
+        { label: 'Credentials', value: '04 verified' },
+        { label: 'Focus', value: 'Frontend + Mobile UI' },
       ],
     },
     cards: [
       {
-        title: 'UX Research Fundamentals',
+        title: 'Curso de Frontend Developer',
         provider: 'Platzi',
-        year: '2024',
-        copy:
-          'A focused foundation in user interviews, problem framing, synthesis, and actionable research outputs.',
+        issuedAt: 'Jun 2025',
+        credentialId: 'b9fe0905-9cc0-4e3b-8df7-f7fe75c9b02b',
+        href: 'https://platzi.com/p/a86988708/curso/1235-course/diploma/detalle/',
       },
       {
-        title: 'UI Design Systems',
+        title: 'Curso de Diseño Mobile First: Prototipos',
         provider: 'Platzi',
-        year: '2024',
-        copy:
-          'Interface consistency, reusable patterns, components, and visual rules designed for scalable product teams.',
+        issuedAt: 'Jun 2025',
+        credentialId: 'c2c4e528-1f5e-4536-8bb3-8a67cdd98c63',
+        href: 'https://platzi.com/p/a86988708/curso/1997-course/diploma/detalle/',
       },
       {
-        title: 'Product Design Workflow',
+        title: 'Curso de Diseño de Interfaces Móviles',
         provider: 'Platzi',
-        year: '2025',
-        copy:
-          'A process-oriented path combining research, ideation, wireframing, prototyping, validation, and delivery.',
+        issuedAt: 'Jun 2025',
+        credentialId: '60ad522c-1d61-45a1-9139-572ec2ddc030',
+        href: 'https://platzi.com/p/a86988708/curso/1906-course/diploma/detalle/',
+      },
+      {
+        title: 'Curso de Diseño para Developers',
+        provider: 'Platzi',
+        issuedAt: 'Jun 2025',
+        credentialId: '06702c5a-da7e-491f-8716-cf0557a9d491',
+        href: 'https://platzi.com/p/a86988708/curso/2467-course/diploma/detalle/',
       },
     ],
   },
   skills: {
     eyebrow: 'Skills & Tools',
-    title: 'Tools, software, and professional strengths arranged with the same dark premium language as the rest of the portfolio.',
+    title:
+      'Tools and professional strengths that support the way I design, prototype, and ship interfaces.',
     copy:
-      'The software now lives in one cleaner visual strip so it feels integrated, while the adjacent block summarizes the business and collaboration skills that strengthen your design work.',
+      'My process combines interface design, frontend implementation, communication, and product thinking to move projects with clarity from concept to handoff.',
     strengthsSubtitle: 'Professional strengths',
-    strengthsTitle:
-      'Design execution supported by business awareness, communication, and responsible AI use.',
     capabilities: [
       {
         title: 'Design leadership',
@@ -289,36 +319,34 @@ const en: Translation = {
           'Organized workflows that connect design quality, timelines, and implementation handoff.',
       },
     ],
-    toolsSubtitle: 'Daily toolkit',
-    toolsCopy:
-      'A direct, single-line strip of the software you use most often for interface design, prototyping, delivery, and AI-assisted execution.',
     tools: [
-      { name: 'Adobe Illustrator', group: 'Vector design', icon: 'illustrator' },
       { name: 'Figma', group: 'UI / Prototyping', icon: 'figma' },
-      { name: 'Affinity', group: 'Creative suite', icon: 'affinity' },
-      { name: 'Adobe XD', group: 'Wireframing', icon: 'xd' },
+      { name: 'Next.js', group: 'App Router', icon: 'nextjs' },
+      { name: 'React', group: 'UI library', icon: 'react' },
+      { name: 'TypeScript', group: 'Typed frontend', icon: 'typescript' },
+      { name: 'Tailwind CSS', group: 'Design system styling', icon: 'tailwind' },
       { name: 'VS Code', group: 'Code editor', icon: 'vscode' },
-      { name: 'GitHub Copilot', group: 'AI pair-programming', icon: 'copilot' },
-      { name: 'OpenAI', group: 'Professional AI usage', icon: 'openai' },
+      { name: 'Framer Motion', group: 'Motion library', icon: 'framer' },
+      { name: 'GitHub', group: 'Version control', icon: 'github' },
     ],
   },
   contact: {
     eyebrow: 'Contact',
-    title: 'A large contact card that closes the SPA with clarity and confidence.',
+    title: 'Let’s build a digital experience that feels clear, useful, and well crafted.',
     copy:
-      'This closing block is designed to feel like a real final CTA instead of a placeholder. Replace the generic information below with your actual contact data when you are ready.',
+      'I’m open to conversations about UX/UI design, product work, redesigns, and frontend-minded collaboration. If you have a project in mind, I’d be glad to talk.',
     primaryCta: 'Send email',
     secondaryCta: 'View projects',
     details: [
-      { label: 'Email', value: 'hello@portfolio.dev' },
-      { label: 'Location', value: 'Remote / Mexico' },
-      { label: 'Availability', value: 'Open to freelance and full-time opportunities' },
-      { label: 'Response time', value: 'Usually within 24-48 hours' },
+      { label: 'Email', value: 'aguilaresau630@gmail.com' },
+      { label: 'LinkedIn', value: 'linkedin.com/in/esauaguilar' },
+      { label: 'GitHub', value: 'github.com/IngEsau' },
+      { label: 'Availability', value: 'Monday to Friday, from 9:00 a.m. to 11:30 p.m.' },
     ],
   },
   footer: {
-    line1: 'Esaú Aguilar. UX/UI Designer and frontend-minded product builder.',
-    line2: 'Portfolio SPA crafted to showcase process, polish, and clear navigation.',
+    line1:
+      'Daniel Esaú Negrete Aguilar. UX/UI Designer focused on digital products, interface systems, and frontend-minded execution. All rights reserved 2026.'
   },
 }
 
@@ -342,133 +370,155 @@ const es: typeof en = {
   },
   stats: [
     {
-      value: '+15',
-      label: 'Proyectos UI',
+      value: '03',
+      label: 'Proyectos seleccionados',
       href: '#projects',
-      cta: 'Ver más',
+      cta: 'Ver proyectos',
       accent: false,
     },
     {
-      value: '+2k',
-      label: 'Usuarios impactados',
-      href: '#contact',
-      cta: 'Ver más',
+      value: 'UX/UI',
+      label: 'Flujos de producto optimizados',
+      href: '#projects',
+      cta: 'Ver trabajo',
       accent: true,
     },
     {
-      value: '+6',
-      label: 'Herramientas de diseño',
-      href: '#skills',
-      cta: 'Ver más',
+      value: '04',
+      label: 'Credenciales verificadas',
+      href: '#certifications',
+      cta: 'Ver credenciales',
       accent: false,
     },
   ],
   about: {
-    title: 'Hi! I’m Esaú',
+    title: 'Hola, soy Esaú',
     paragraphs: [
       'Diseñador UX/UI apasionado por crear experiencias digitales intuitivas y centradas en las personas.',
-      'Me especializo en convertir problemas complejos en soluciones simples y elegantes, combinando investigación de usuarios, estrategia y diseño visual para crear productos que realmente funcionan.',
-      'Desde wireframes hasta interfaces pulidas, creo que el diseño no solo trata de cómo se ve algo, sino de cómo se siente y funciona.',
-      'Construyamos experiencias que las personas disfruten usar.',
+      'Trabajo entre research, diseño de interfaces, prototipado e implementación frontend para convertir necesidades complejas en flujos claros y productos bien estructurados.',
+      'Mi enfoque combina pulido visual con impacto real de negocio, desde mejorar conversiones y productividad hasta hacer que los sistemas digitales sean más fáciles de entender y usar.',
+      'Desde wireframes hasta interfaces pulidas, me enfoco en productos que no solo se vean bien, sino que también se sientan coherentes, útiles y eficientes.',
+      'Me interesan especialmente los proyectos donde UX, UI y estrategia de producto deben trabajar juntas para generar resultados reales.',
     ],
-    primaryCta: 'Sobre mí',
+    primaryCta: 'Ver proyectos',
     secondaryCta: 'Descargar CV',
   },
   projects: {
     eyebrow: 'Proyectos',
-    title: 'Una galería a pantalla completa pensada para que tu mejor trabajo UX/UI domine la vista.',
+    title:
+      'Trabajo UX/UI seleccionado con foco en claridad, sistemas e interfaces que se sienten intencionales desde la primera pantalla.',
     copy:
-      'Esta sección debe sentirse como el centro visual de la SPA: más amplia, más marcada y con una composición editorial para que el trabajo luzca como una galería premium y no como tarjetas genéricas apiladas.',
+      'Estos proyectos muestran cómo resuelvo problemas desde UX/UI: mejorando claridad, apoyando flujos reales de trabajo y convirtiendo productos digitales en experiencias más efectivas para negocios y personas usuarias.',
     featured: {
-      title: 'Rediseño de Mercury Wallet',
-      category: 'Rediseño de producto',
-      metric: '-38% fricción en onboarding',
+      title: 'Bandas Asesoría y Montaje S.A. de C.V.',
+      category: 'Rediseño web + SEO + e-commerce',
+      metric: 'Más ventas y clientes calificados',
       copy:
-        'Una experiencia fintech de onboarding replanteada para sentirse confiable, clara y operativamente eficiente en pasos de identidad y entrada al producto.',
-      tags: ['Síntesis de research', 'Rediseño de flujo', 'Sistema de interfaz'],
-      cta: 'Abrir caso de estudio',
+        'Realicé un rediseño completo del sitio en WordPress con foco en mejorar estructura, visibilidad en buscadores y experiencia de compra. El resultado fue una presencia digital más sólida, mejor SEO, más clientes y mayor volumen de ventas a través del flujo e-commerce integrado.',
+      tags: ['WordPress', 'Mejora SEO', 'UX para e-commerce'],
+      cta: 'Visitar sitio',
+      href: 'https://bandasyasesoria.com.mx/',
+      external: true,
     },
     side: [
       {
-        title: 'Centro de mando analítico',
-        category: 'Dashboard UI',
-        metric: '+27% claridad de tareas',
+        title: 'Sistema mobile de Montblan',
+        category: 'Optimización de flujo mobile + web',
+        metric: '+80% productividad en captura de pedidos',
         copy:
-          'Datos densos convertidos en una capa de decisión más limpia para equipos internos de operaciones y producto.',
-        tags: ['Jerarquía', 'Escaneabilidad', 'Estados responsive'],
-        cta: 'Ver proyecto',
+          'Mejoré la UX/UI general para que los flujos clave fueran más eficientes y fáciles de recorrer. El rediseño ayudó a que el equipo capturara pedidos más rápido y trabajara con mejor continuidad entre contextos web y mobile.',
+        tags: ['Eficiencia de flujos', 'Rediseño UX/UI', 'Productividad operativa'],
+        cta: 'Ver sistema en vivo',
+        href: 'https://montblan.lerco.agency/',
+        external: true,
       },
       {
-        title: 'Landing boutique de e-commerce',
-        category: 'Experiencia de marketing',
-        metric: '+19% profundidad de clic',
+        title: 'Sociograma UTP',
+        category: 'Sistema educativo + análisis social',
+        metric: 'Detección más rápida de relaciones de grupo',
         copy:
-          'Visuales editoriales y bloques de conversión alineados en una experiencia de landing premium y de alta confianza.',
-        tags: ['Dirección visual', 'Storytelling', 'Flujo de CTA'],
-        cta: 'Ver proyecto',
+          'Un sistema desarrollado para la Universidad Tecnológica de Puebla que permite identificar con mayor rapidez a personas aisladas dentro de grupos. Mi aporte estuvo principalmente en el diseño en Figma y parte de la implementación para facilitar lectura e interpretación de la información.',
+        tags: ['UI en Figma', 'Diseño de sistema', 'Producto educativo'],
+        cta: 'Abrir proyecto en vivo',
+        href: 'https://sociograma-utp.pages.dev/login',
+        external: true,
       },
     ],
     wide: {
-      title: 'Sistema de portfolio y dirección de diseño',
-      category: 'Marca + ejecución frontend',
+      title: 'Backstabber',
+      category: 'Interfaz desktop para herramientas de seguridad',
       copy:
-        'Un lenguaje modular de portfolio que conecta tipografía, narrativa e implementación frontend para que la experiencia visual se sienta intencional de inicio a fin.',
-      tags: ['Design systems', 'Implementación frontend', 'Arquitectura de contenido'],
+        'Un conjunto modular de herramientas para pruebas de penetración escrito en Python con interfaz PyQt5. Lo relevante dentro de mi portfolio es la parte visual y de interacción: la estructura, jerarquía y patrones de control se trabajaron para que una herramienta técnicamente densa se sintiera más comprensible y usable a partir de principios UX y heurísticas de Nielsen.',
+      tags: ['UI en PyQt5', 'Heurísticas de Nielsen', 'Jerarquía de información'],
+      cta: 'Ver repositorio',
+      href: 'https://github.com/IngEsau/Backstabber',
+      external: true,
       stats: [
-        { label: 'Casos de estudio', value: '03' },
-        { label: 'Sistemas construidos', value: '06' },
-        { label: 'Etapas de diseño', value: 'End to end' },
+        { label: 'Plataforma', value: 'Desktop' },
+        { label: 'Stack', value: 'Python + PyQt5' },
+        { label: 'Enfoque', value: 'UI técnica usable' },
       ],
     },
   },
   certifications: {
     eyebrow: 'Certificaciones',
-    title: 'Una vitrina de certificaciones más limpia, enfocada en Platzi, credibilidad y crecimiento profesional visible.',
+    title:
+      'Aprendizaje verificado con enfoque en fundamentos frontend, pensamiento mobile-first y ejecución de interfaces.',
     copy:
-      'Ahora esta sección se comporta como un área premium de credenciales. Primero da contexto a tu ruta de aprendizaje y luego presenta cada certificado con la jerarquía suficiente para sentirse intencional.',
+      'Estas credenciales respaldan la forma en la que trabajo: con atención a la usabilidad, la respuesta en distintos dispositivos y los detalles que hacen una interfaz más clara de usar.',
+    issuedLabel: 'Expedición',
+    credentialIdLabel: 'ID de la credencial',
+    ctaLabel: 'Mostrar credencial',
     hero: {
       subtitle: 'Ruta de aprendizaje Platzi',
-      title: 'Aprendizaje continuo en research, sistemas de producto y craft de interfaces.',
+      title:
+        'Una ruta de aprendizaje construida alrededor de frontend, diseño mobile-first y mejores decisiones de interfaz.',
       copy:
-        'Usa este panel principal para enmarcar tus certificaciones como parte de una práctica UX/UI en evolución, no como insignias desconectadas.',
+        'Cada curso refuerza áreas prácticas de mi proceso: cómo se estructuran las interfaces, cómo responden en pantallas pequeñas y cómo las decisiones de diseño se traducen en experiencias listas para producción.',
       meta: [
         { label: 'Proveedor', value: 'Platzi' },
-        { label: 'Enfoque', value: 'UX/UI + Producto' },
-        { label: 'Formato', value: 'Aprendizaje continuo' },
+        { label: 'Credenciales', value: '04 verificadas' },
+        { label: 'Enfoque', value: 'Frontend + UI móvil' },
       ],
     },
     cards: [
       {
-        title: 'Fundamentos de UX Research',
+        title: 'Curso de Frontend Developer',
         provider: 'Platzi',
-        year: '2024',
-        copy:
-          'Una base enfocada en entrevistas a usuarios, definición de problemas, síntesis y hallazgos accionables.',
+        issuedAt: 'jun. 2025',
+        credentialId: 'b9fe0905-9cc0-4e3b-8df7-f7fe75c9b02b',
+        href: 'https://platzi.com/p/a86988708/curso/1235-course/diploma/detalle/',
       },
       {
-        title: 'Sistemas de Diseño UI',
+        title: 'Curso de Diseño Mobile First: Prototipos',
         provider: 'Platzi',
-        year: '2024',
-        copy:
-          'Consistencia de interfaces, patrones reutilizables, componentes y reglas visuales pensadas para equipos escalables.',
+        issuedAt: 'jun. 2025',
+        credentialId: 'c2c4e528-1f5e-4536-8bb3-8a67cdd98c63',
+        href: 'https://platzi.com/p/a86988708/curso/1997-course/diploma/detalle/',
       },
       {
-        title: 'Flujo de trabajo en Product Design',
+        title: 'Curso de Diseño de Interfaces Móviles',
         provider: 'Platzi',
-        year: '2025',
-        copy:
-          'Una ruta orientada al proceso que combina research, ideación, wireframing, prototipado, validación y entrega.',
+        issuedAt: 'jun. 2025',
+        credentialId: '60ad522c-1d61-45a1-9139-572ec2ddc030',
+        href: 'https://platzi.com/p/a86988708/curso/1906-course/diploma/detalle/',
+      },
+      {
+        title: 'Curso de Diseño para Developers',
+        provider: 'Platzi',
+        issuedAt: 'jun. 2025',
+        credentialId: '06702c5a-da7e-491f-8716-cf0557a9d491',
+        href: 'https://platzi.com/p/a86988708/curso/2467-course/diploma/detalle/',
       },
     ],
   },
   skills: {
     eyebrow: 'Skills & Tools',
-    title: 'Herramientas, software y fortalezas profesionales organizadas con el mismo lenguaje visual premium del resto del portfolio.',
+    title:
+      'Herramientas y fortalezas profesionales que respaldan la forma en la que diseño, prototipo y llevo interfaces a producción.',
     copy:
-      'El software ahora vive en una sola franja visual más limpia para sentirse integrado, mientras el bloque contiguo resume las habilidades de negocio y colaboración que fortalecen tu trabajo de diseño.',
+      'Mi proceso combina diseño de interfaz, implementación frontend, comunicación y pensamiento de producto para mover proyectos con claridad desde la idea hasta el handoff.',
     strengthsSubtitle: 'Fortalezas profesionales',
-    strengthsTitle:
-      'Ejecución de diseño respaldada por visión de negocio, comunicación y uso responsable de IA.',
     capabilities: [
       {
         title: 'Liderazgo de diseño',
@@ -491,36 +541,34 @@ const es: typeof en = {
           'Workflows organizados que conectan calidad de diseño, tiempos de entrega y handoff a implementación.',
       },
     ],
-    toolsSubtitle: 'Toolkit diario',
-    toolsCopy:
-      'Una sola línea directa con el software que más usas para diseño de interfaces, prototipado, entrega e implementación asistida por IA.',
     tools: [
-      { name: 'Adobe Illustrator', group: 'Diseño vectorial', icon: 'illustrator' },
       { name: 'Figma', group: 'UI / Prototipado', icon: 'figma' },
-      { name: 'Affinity', group: 'Suite creativa', icon: 'affinity' },
-      { name: 'Adobe XD', group: 'Wireframing', icon: 'xd' },
+      { name: 'Next.js', group: 'App Router', icon: 'nextjs' },
+      { name: 'React', group: 'Librería UI', icon: 'react' },
+      { name: 'TypeScript', group: 'Frontend tipado', icon: 'typescript' },
+      { name: 'Tailwind CSS', group: 'Styling de sistema', icon: 'tailwind' },
       { name: 'VS Code', group: 'Editor de código', icon: 'vscode' },
-      { name: 'GitHub Copilot', group: 'Programación asistida por IA', icon: 'copilot' },
-      { name: 'OpenAI', group: 'Uso profesional de IA', icon: 'openai' },
+      { name: 'Framer Motion', group: 'Librería de motion', icon: 'framer' },
+      { name: 'GitHub', group: 'Control de versiones', icon: 'github' },
     ],
   },
   contact: {
     eyebrow: 'Contacto',
-    title: 'Una gran card de contacto que cierra la SPA con claridad y confianza.',
+    title: 'Hablemos sobre una experiencia digital clara, útil y bien cuidada.',
     copy:
-      'Este bloque final está diseñado para sentirse como un CTA real y no como un placeholder. Reemplaza la información genérica de abajo por tus datos reales cuando quieras.',
+      'Estoy abierto a conversaciones sobre UX/UI, producto, rediseños y colaboración con enfoque frontend. Si tienes un proyecto en mente, será un gusto hablar.',
     primaryCta: 'Enviar correo',
     secondaryCta: 'Ver proyectos',
     details: [
-      { label: 'Correo', value: 'hello@portfolio.dev' },
-      { label: 'Ubicación', value: 'Remoto / México' },
-      { label: 'Disponibilidad', value: 'Abierto a freelance y oportunidades full-time' },
-      { label: 'Tiempo de respuesta', value: 'Normalmente en 24-48 horas' },
-    ],
+      { label: 'Correo', value: 'aguilaresau630@gmail.com' },
+      { label: 'LinkedIn', value: 'linkedin.com/in/esauaguilar' },
+      { label: 'GitHub', value: 'github.com/IngEsau' },
+      { label: 'Disponibilidad', value: 'Lunes a viernes, de 9:00 a.m. a 11:30 p.m.' },
+    ],  
   },
   footer: {
-    line1: 'Esaú Aguilar. Diseñador UX/UI y constructor de producto con mentalidad frontend.',
-    line2: 'Portfolio SPA creado para mostrar proceso, detalle visual y navegación clara.',
+    line1:
+      'Daniel Esaú Negrete Aguilar. Diseñador UX/UI enfocado en productos digitales, sistemas de interfaz y ejecución con mentalidad frontend. Todos los derechos reservados 2026.',
   },
 }
 

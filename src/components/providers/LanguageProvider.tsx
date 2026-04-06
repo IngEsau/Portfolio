@@ -7,6 +7,7 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from 'react'
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion'
 import {
   defaultLanguage,
   dictionaries,
@@ -69,6 +70,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language])
 
   const setLanguage = (nextLanguage: Language) => {
+    if (getStoredLanguage() === nextLanguage) {
+      return
+    }
+
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage)
     window.dispatchEvent(new Event(LANGUAGE_EVENT))
   }
@@ -78,16 +83,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <LanguageContext.Provider
-      value={{
-        language,
-        dictionary: dictionaries[language],
-        setLanguage,
-        toggleLanguage,
-      }}
-    >
-      {children}
-    </LanguageContext.Provider>
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="user">
+        <LanguageContext.Provider
+          value={{
+            language,
+            dictionary: dictionaries[language],
+            setLanguage,
+            toggleLanguage,
+          }}
+        >
+          {children}
+        </LanguageContext.Provider>
+      </MotionConfig>
+    </LazyMotion>
   )
 }
 
