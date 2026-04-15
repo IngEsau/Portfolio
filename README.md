@@ -34,7 +34,7 @@ npm run dev
 The app will be available at:
 
 ```bash
-https://portfolio-ingesaus-projects.vercel.app/
+https://portfolio-rho-lyart-h7gxpbcqx1.vercel.app/
 ```
 
 Useful scripts:
