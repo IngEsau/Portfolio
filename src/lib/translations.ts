@@ -207,7 +207,7 @@ const en: Translation = {
           'I improved the overall UX/UI to make core business flows more efficient and easier to navigate. The redesign helped the team capture orders faster and move through operational tasks with better continuity across web and mobile contexts.',
         tags: ['Flow efficiency', 'UX/UI redesign', 'Operational productivity'],
         cta: 'View live system',
-        href: 'https://montblan.lerco.agency/',
+        href: 'https://montblan-mobile.netlify.app/',
         external: true,
       },
       {
@@ -429,7 +429,7 @@ const es: typeof en = {
           'Mejoré la UX/UI general para que los flujos clave fueran más eficientes y fáciles de recorrer. El rediseño ayudó a que el equipo capturara pedidos más rápido y trabajara con mejor continuidad entre contextos web y mobile.',
         tags: ['Eficiencia de flujos', 'Rediseño UX/UI', 'Productividad operativa'],
         cta: 'Ver sistema en vivo',
-        href: 'https://montblan.lerco.agency/',
+        href: 'https://montblan-mobile.netlify.app/',
         external: true,
       },
       {
